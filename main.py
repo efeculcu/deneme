@@ -1,6 +1,6 @@
 import discord
 from bot_log import *
-from bot_token import TOKEN
+from bot_token import ayarlar
 from bot_log import gen_pass
 
 
@@ -9,7 +9,7 @@ intents = discord.Intents.default()
 # Mesajları okuma ayrıcalığını etkinleştirelim
 intents.message_content = True
 # client (istemci) değişkeniyle bir bot oluşturalım ve ayrıcalıkları ona aktaralım
-client = discord.Client(intentsb=intents)
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
@@ -30,6 +30,5 @@ async def on_message(message):
     else:
         await message.channel.send(message.content)
 
-client.run(TOKEN)
-
+client.run(ayarlar["TOKEN"])
 

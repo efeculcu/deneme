@@ -1,17 +1,35 @@
-import random 
-x = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-password_len = int(input("Parolanın uzunluğunu girin: "))
-password_adeti = int(input("Kaç adet şifre oluşturulsun: "))
-for y in range (0, password_len):
- password = ""
-for y in range (0,password_adeti):
-    print (password)
-for password in range(0, password_len):
-   sifre2= random.choice(x)
-   sifre = sifre + sifre2
-print ("random sifreniz" + password)
+import discord
+from bot_log import *
+from bot_token import TOKEN
+from bot_log import gen_pass
 
 
+# ayricaliklar (intents) değişkeni botun ayrıcalıklarını depolayacak
+intents = discord.Intents.default()
+# Mesajları okuma ayrıcalığını etkinleştirelim
+intents.message_content = True
+# client (istemci) değişkeniyle bir bot oluşturalım ve ayrıcalıkları ona aktaralım
+client = discord.Client(intentsb=intents)
+
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith('$hello'):
+        await message.channel.send("Hi!")
+    elif message.content.startswith('$bye'):
+        await message.channel.send("\\U0001f642")
+    elif message.content.startswith('$pass'):
+        await message.channel.send(gen_pass(10))
+    elif message.content.startswith('$emoji'):
+        await message.channel.send(gen_emoji())
+    else:
+        await message.channel.send(message.content)
+
+client.run(TOKEN)
 
 

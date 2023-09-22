@@ -1,0 +1,21 @@
+import discord
+f = open('file_read_write/text.txt', 'r', encoding='utf-8')
+text = f.read()
+print(text)
+f.close()
+
+with open('file_read_write/text.txt', 'r', encoding='utf-8') as f:
+    print(f.read())
+
+
+    f = open('metinbelgesi.txt', 'w', encoding='utf-8')
+text = 'Yeni Yazı'
+f.write(text)
+f.close()
+
+
+with open('images/cat.jpg', 'rb') as f:
+        picture = discord.File(f)
+
+import os
+print(os.listdir('images'))
